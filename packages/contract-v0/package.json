@@ -1,0 +1,8 @@
+{
+  "name": "contract-creator",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+    "hardhat": "^2.12.7"
+  }
+}
