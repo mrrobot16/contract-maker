@@ -4,7 +4,7 @@
 
 In today's world, crypto assets and blockchain technology have gained a massive amount of traction for an array of reasons. Countries like El Salvador, Brazil, China, and India have adopted and invited its development, demonstrating that crypto is here to stay.
 
-It is safe to say that crypto and blockchain technology are here to stay because the blockchain is an intersection of democracy and technology, enabling humanity to create systems that can assure democracy by applying cryptographic techniques, game theory schemas, and software development.
+It is safe to say that crypto and blockchain technology is here to stay because the blockchain is an intersection of democracy and technology, enabling humanity to create systems that can assure democracy by applying cryptographic techniques, game theory schemas, and software development.
 
 The fact that humanity has created an alternative financial system free from traditional institutions that is democratized, censorship-proof, and trustless through peer-to-peer transactions is very revolutionary.
 
