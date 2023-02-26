@@ -56,7 +56,9 @@ Create a tool that enables non-technical users to deploy smart contracts without
   - Tests for UI.
 
 - **Smart Contracts**
-  - Write a contract factory that will deploy an ERC standard contract.
+  - Write a proxy contract
+  - Write a contract factory
+  
 
   ## Milestones
 
