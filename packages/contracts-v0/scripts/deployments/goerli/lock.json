@@ -1,0 +1,11 @@
+{
+  "timestamp": 1677387776,
+  "network": "goerli",
+  "address": "0x8Fd2F749dC15A3eDe8a6cD14b06bb17EdE18520C",
+  "etherscan_url": "https://goerli.etherscan.io/address/0x8Fd2F749dC15A3eDe8a6cD14b06bb17EdE18520C",
+  "unlockTime": 1708923776,
+  "lockedAmount": {
+    "type": "BigNumber",
+    "hex": "0x011f6def1900"
+  }
+}
