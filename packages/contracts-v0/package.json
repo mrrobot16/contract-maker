@@ -1,8 +1,56 @@
 {
-  "name": "contract-creator",
-  "version": "0.0.0",
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
-    "hardhat": "^2.12.7"
-  }
+    "name": "gigchain-contracts",
+    "private": "true",
+    "scripts": {
+        "help": "npx hardhat help",
+        "test": "npx hardhat test",
+        "test:organizationV1": "npx hardhat test test/OrganizationV1.ts",
+        "test:gas": "REPORT_GAS=true npx hardhat test",
+        "local:node": "npx hardhat node",
+        "hardhat:coverage": "npx hardhat coverage",
+        "compile": "npx hardhat compile",
+        "check": "yarn hardhat:check",
+        "hardhat:check": "npx hardhat check",
+        "deploy": "yarn scripts:deploy",
+        "scripts:deploy": "yarn scripts:deploy:goerli",
+        "scripts:deploy:goerli": "npx hardhat run scripts/deploy.ts --network goerli",
+        "prettier:write": "prettier --write .",
+        "prettier:check": "prettier --check .",
+        "lint": "yarn lint:sol",
+        "list:ts": "",
+        "lint:sol": "yarn solhint",
+        "solhint": "solhint contracts/**/*.sol"
+    },
+    "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+        "@nomicfoundation/hardhat-network-helpers": "^1.0.7",
+        "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+        "@nomiclabs/hardhat-solhint": "^3.0.0",
+        "@typechain/ethers-v5": "^10.2.0",
+        "@typechain/hardhat": "^6.1.5",
+        "@types/chai": "^4.3.4",
+        "@types/jest": "^29.2.5",
+        "@types/mocha": "^9.0.0",
+        "chai": "^4.3.7",
+        "dotenv": "^16.0.3",
+        "hardhat": "^2.12.6",
+        "prettier": "^2.8.3",
+        "ts-node": "^10.9.1",
+        "typechain": "^8.1.1",
+        "typescript": "^4.9.4"
+    },
+    "dependencies": {
+        "@nomiclabs/hardhat-ethers": "^2.2.2",
+        "@nomiclabs/hardhat-etherscan": "^3.1.5",
+        "@openzeppelin/contracts": "^4.8.1",
+        "ethers": "^5.7.2",
+        "hardhat-gas-reporter": "^1.0.9",
+        "solidity-coverage": "^0.8.2"
+    },
+    "workspaces": {
+        "packages": [
+            "contracts",
+            "test"
+        ]
+    }
 }
