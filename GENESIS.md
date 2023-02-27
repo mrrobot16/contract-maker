@@ -92,11 +92,12 @@ The following is an estimate based on the Scope of Work as currently stated and 
 
 **Term**: March 1st - April 31st, 2023
 
-| **Start Date** | **Milestone #** | **Development time** | Cost |
-| - | - | - | - | - |-|
-| March 1st &nbsp; &nbsp;| 0 | X hr | X ETH/USDC/USDT/DAI
-| March 15th &nbsp;| 1 | X hr | X ETH/USDC/USDT/DAI
-| March 29th | 2 | X hr | X ETH/USDC/USDT/DAI
-| April 12th | 3 | X hr | X ETH/USDC/USDT/DAI
-| April 30th &nbsp;&nbsp; | 4 | X hr | X ETH/USDC/USDT/DAI
+| Start Date | Milestone # | Development Time | Cost
+| -------- | -------- | -------- | -------- |
+| March 1st  | 0     | X hr    | X ETH/USDC/USDT/DAI
+| March 15th | 1     | X hr    | X ETH/USDC/USDT/DAI
+| March 29th | 2     | X hr    | X ETH/USDC/USDT/DAI
+| April 12th | 3     | X hr    | X ETH/USDC/USDT/DAI
+| April 30th | 4     | X hr    | X ETH/USDC/USDT/DAI
+
 **Total Budget**: $X,XXX
