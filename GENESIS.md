@@ -85,19 +85,3 @@ Create a tool that enables non-technical users to deploy smart contracts without
   4 - **Admin Frontend**
     - Screen where the user will view a list of deployed contracts. This screen can be consider a dashboard.
 
-
-## Budget - TBD
-
-The following is an estimate based on the Scope of Work as currently stated and can change if either are revised.
-
-**Term**: March 1st - April 31st, 2023
-
-| Start Date | Milestone # | Development Time | Cost
-| -------- | -------- | -------- | -------- |
-| March 1st  | 0     | X hr    | X ETH/USDC/USDT/DAI
-| March 15th | 1     | X hr    | X ETH/USDC/USDT/DAI
-| March 29th | 2     | X hr    | X ETH/USDC/USDT/DAI
-| April 12th | 3     | X hr    | X ETH/USDC/USDT/DAI
-| April 30th | 4     | X hr    | X ETH/USDC/USDT/DAI
-
-**Total Budget**: $X,XXX
