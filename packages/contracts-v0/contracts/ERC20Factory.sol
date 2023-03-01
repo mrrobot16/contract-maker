@@ -8,7 +8,7 @@ contract ERC20Factory is ERC20 {
     constructor(string memory name, string memory symbol) ERC20(name, symbol) {}
   
     function mint(address account, uint256 amount) public {
-      console.log("ERC20Factory mint for account % and amount of s%", account, amount);
+      console.log("ERC20Factory mint for account %s and amount of %s", account, amount);
       _mint(account, amount);
     }
 
