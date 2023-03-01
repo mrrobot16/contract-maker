@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 import "hardhat/console.sol";
-// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./ERC20Factory.sol";
 
 contract ERCFactory {
     ERC20[] public erc20s;
-    ERC20Factory private _erc20;
     address private _owner;
     
     constructor() payable {}
@@ -17,7 +15,7 @@ contract ERCFactory {
     }
 
     function createERC20(string memory name, string memory symbol, uint256 totalSupply) public {
-      _erc20 = new ERC20Factory(name, symbol);
+      ERC20Factory _erc20 = new ERC20Factory(name, symbol);
       _erc20.mint(msg.sender, totalSupply);
       erc20s.push(_erc20);
     }
