@@ -1,7 +1,9 @@
 import { expect } from 'chai';
 import { ethers, } from 'hardhat';
 import { BigNumber, ContractFactory, Contract, Signer } from 'ethers';
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/src/signers"
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/src/signers";
+
+import erc20Factory from '../artifacts/contracts/ERC20Factory.sol/ERC20Factory.json';
 
 describe('ERCFactory Contract', function () {
     let contract: ContractFactory;
@@ -10,6 +12,7 @@ describe('ERCFactory Contract', function () {
     let signers: SignerWithAddress[] | Signer[];
     let owner: SignerWithAddress | Signer;
     let erc20Tokens: any[];
+    let erc20Token: any
 
     // NOTE: Before all tests, deploy the contract and get the contract instance
     this.beforeAll(async () => {
@@ -22,7 +25,7 @@ describe('ERCFactory Contract', function () {
         await ercFactory.deployed();
         address = ercFactory.address
         ercFactory.initialize();
-        ercFactory.createERC20("Test", "TST", ethers.utils.parseEther(".0000067890"));
+        ercFactory.createERC20("TestFactoryToken", "TFT", ethers.utils.parseEther(".0000067890"));
     });
 
     describe('Deployment', function () {     
@@ -44,8 +47,12 @@ describe('ERCFactory Contract', function () {
             expect(erc20TokensCount).to.equal(1);
             // NOTE this should return an object with the address, name, symbol, etc. 
             // Instead it returns a addres string
-            let erc20Token = await ercFactory.getERC20(0); 
-            console.log("erc20Token", erc20Token);            
+            erc20Token = await ercFactory.getERC20(0);          
+        });
+
+        it("Should return correct name of erc20 token", async function () {
+            const contract = await ethers.getContractAt(erc20Factory.abi, erc20Token);
+            expect(await contract.name()).to.equal("TestFactoryToken");          
         });
     });
 
