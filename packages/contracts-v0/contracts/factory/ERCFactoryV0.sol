@@ -14,7 +14,7 @@ contract ERCFactoryV0 {
       _owner = msg.sender;
     }
 
-    function createERC20(string memory name, string memory symbol, uint256 totalSupply) public {
+    function createERC20(string memory name, string memory symbol, uint256 totalSupply) public virtual {
       ERC20FactoryV0 _erc20 = new ERC20FactoryV0(name, symbol);
       _erc20.mint(msg.sender, totalSupply);
       erc20s.push(_erc20);
