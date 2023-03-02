@@ -12,5 +12,9 @@ contract ERC20FactoryV1 is ERC20 {
       _mint(account, amount);
     }
 
+    function mintV1(address account, uint256 amount) public {
+      console.log("ERC20V1Factory mintV1 for account %s and amount of %s", account, amount);
+      _mint(account, amount);
+    }
 
 }

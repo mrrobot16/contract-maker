@@ -20,6 +20,12 @@ contract ERCFactoryV1 {
       erc20s.push(_erc20);
     }
 
+    function createERC20V1(string memory name, string memory symbol, uint256 totalSupply) public {
+      ERC20FactoryV1 _erc20 = new ERC20FactoryV1(name, symbol);
+      _erc20.mint(msg.sender, totalSupply);
+      erc20s.push(_erc20);
+    }
+
     function owner() public view returns (address) {
       return _owner;
     }
