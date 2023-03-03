@@ -5,7 +5,5 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
 
 contract ERCFactoryProxyAdmin is ProxyAdmin {
-    constructor() ProxyAdmin() {
-        console.log("ERCFactoryProxyAdmin address: %s", address(this));
-    }
+
 }
