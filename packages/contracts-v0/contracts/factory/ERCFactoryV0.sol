@@ -6,11 +6,13 @@ import "./ERC20FactoryV0.sol";
 contract ERCFactoryV0 {
     ERC20[] public erc20s;
     address private _owner;
+    // NOTE: This address is of erc factory storage contract
+    address private ercStorage;
     
     constructor() payable {}
 
-    function initialize() public {
-      console.log("Initialized ERCFactory contract");
+    function initialize(address _ercStorage) public {
+      ercStorage = _ercStorage;
       _owner = msg.sender;
     }
 

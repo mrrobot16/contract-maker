@@ -7,6 +7,8 @@ import erc20Factory from '../artifacts/contracts/factory/ERC20FactoryV0.sol/ERC2
 
 describe('ERCFactoryV0 Contract', function () {
     let contract: ContractFactory;
+    let storage: ContractFactory;
+    let ercStorage: Contract;
     let ercFactory: Contract;
     let address: string;
     let signers: SignerWithAddress[] | Signer[];
@@ -18,13 +20,19 @@ describe('ERCFactoryV0 Contract', function () {
     this.beforeAll(async () => {
         signers = await ethers.getSigners();
         owner = signers[0];
+
+        storage = await ethers.getContractFactory(
+          "ERCFactoryStorage"
+        );
+        ercStorage = await storage.deploy();
+
         contract = await ethers.getContractFactory(
             "ERCFactoryV0"
         );
         ercFactory = await contract.deploy({value: ethers.utils.parseEther("0.00012345")});    
         await ercFactory.deployed();
         address = ercFactory.address
-        ercFactory.initialize();
+        ercFactory.initialize(ercStorage.address);
         ercFactory.createERC20("TestFactoryTokenV0", "TFT", ethers.utils.parseEther(".0000067890"));
     });
 

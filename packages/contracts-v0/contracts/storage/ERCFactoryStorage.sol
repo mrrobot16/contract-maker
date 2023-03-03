@@ -11,7 +11,8 @@ contract ERCFactoryStorage {
         console.log("ERCFactoryStorage constructor with address: %s", address(this));
     }
 
-    function setERC20s(address erc20) external {
+    function setERC20(address erc20) external {
+      console.log("ERCFactoryStorage setERC20 with address: %s", erc20);
       erc20s.push(erc20);
     }
 
