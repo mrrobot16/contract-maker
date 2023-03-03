@@ -9,6 +9,7 @@ describe('ERCFactoryV0 Contract', function () {
     let contract: ContractFactory;
     let storage: ContractFactory;
     let ercStorage: Contract;
+    let ercStorageAddress: string;
     let ercFactory: Contract;
     let address: string;
     let signers: SignerWithAddress[] | Signer[];
@@ -25,15 +26,16 @@ describe('ERCFactoryV0 Contract', function () {
           "ERCFactoryStorage"
         );
         ercStorage = await storage.deploy();
+        await ercStorage.deployed();
+        ercStorageAddress = ercStorage.address;
 
         contract = await ethers.getContractFactory(
             "ERCFactoryV0"
         );
         ercFactory = await contract.deploy({value: ethers.utils.parseEther("0.00012345")});    
         await ercFactory.deployed();
+        await ercFactory.initialize(ercStorageAddress);
         address = ercFactory.address
-        ercFactory.initialize(ercStorage.address);
-        ercFactory.createERC20("TestFactoryTokenV0", "TFT", ethers.utils.parseEther(".0000067890"));
     });
 
     describe('Deployment', function () {     
@@ -45,17 +47,20 @@ describe('ERCFactoryV0 Contract', function () {
             expect(address).to.equal(ercFactory.address);
         });
 
+        it("Should create ERC20 token", async function () {
+            await ercFactory.createERC20("TestFactoryTokenV0", "TFT", ethers.utils.parseEther(".0000067890"));
+        });
+
         it("Should correct count of erc20 tokens", async function () {
             // NOTE this should return an array of erc20 token object with the address, name, symbol, etc. 
             // Instead it returns an array of string addresses
-            erc20Tokens = await ercFactory.getERC20s();
-
-            let erc20TokensCount = await ercFactory.erc20sCount();
+            erc20Tokens = await ercStorage.getERC20s();
+            let erc20TokensCount = await ercStorage.erc20sCount();
             expect(erc20Tokens.length).to.equal(1);
             expect(erc20TokensCount).to.equal(1);
             // NOTE this should return an object with the address, name, symbol, etc. 
             // Instead it returns a addres string
-            erc20Token = await ercFactory.getERC20(0);          
+            erc20Token = await ercStorage.getERC20(0);    
         });
 
         it("Should return correct name of erc20 token", async function () {
