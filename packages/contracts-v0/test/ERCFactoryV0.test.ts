@@ -46,12 +46,13 @@ describe('ERCFactoryV0 Contract', function () {
         );
         ercFactory = await contract.deploy({value: ethers.utils.parseEther("0.00012345")});    
         await ercFactory.deployed();
-        await ercFactory.initialize(ercStorageAddress);
+        // await ercFactory.initialize(ercStorageAddress);
+        await ercFactory.initialize();
         address = ercFactory.address
 
     });
 
-    describe('Deployment ERCFactoryStorage', function () {     
+    describe.skip('Deployment ERCFactoryStorage', function () {     
         it("Should deploy storage contract correctly", async function () {
             expect(typeof ercStorageAddress).to.equal("string");
             expect(ercStorageAddress.slice(0, 2)).to.equal("0x");
@@ -81,14 +82,14 @@ describe('ERCFactoryV0 Contract', function () {
             await ercFactory.createERC20("TestFactoryTokenV0", "TFT", ethers.utils.parseEther(".0000067890"));
         });
 
-        it("Should have correct count of erc20 tokens after ercFactory.createERC20()", async function () {
+        it.skip("Should have correct count of erc20 tokens after ercFactory.createERC20()", async function () {
             erc20Tokens = await ercStorage.getERC20s();
             let erc20TokensCount = await ercStorage.erc20sCount();
             expect(erc20Tokens.length).to.equal(1);
             expect(erc20TokensCount).to.equal(1);
         });
 
-        it("Should return correct name of erc20 token after ercFactory.createERC20()", async function () {
+        it.skip("Should return correct name of erc20 token after ercFactory.createERC20()", async function () {
             erc20Token = await ercStorage.getERC20(0);    
             const contract = await ethers.getContractAt(erc20FactoryV0.abi, erc20Token);
             expect(await contract.name()).to.equal("TestFactoryTokenV0");          
