@@ -5,6 +5,8 @@
         "help": "npx hardhat help",
         "test": "yarn test:ercFactory:v0",
         "test:lock":"npx hardhat test test/Lock.test.ts",
+        "test:factory":"npx hardhat test test/ContractFactory.test.ts",
+        "test:factory2":"npx hardhat test test/ContractFactory.test2.ts",
         "test:ercFactory:v0": "npx hardhat test test/ERCFactoryV0.test.ts",
         "test:all": "npx hardhat test",
         "test:gas": "REPORT_GAS=true npx hardhat test",
