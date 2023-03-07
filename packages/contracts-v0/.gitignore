@@ -8,5 +8,6 @@ typechain-types
 # Hardhat files
 cache
 artifacts
-
+test/ContractFactory.test.ts
+test/ContractFactory.test2.ts
 github.commits.sh
