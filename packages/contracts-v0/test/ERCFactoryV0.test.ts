@@ -77,11 +77,11 @@ describe('ERCFactoryV0 Contract', function () {
                 // totalSupply
             ];
             const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
-            // const createERC20 = await ercFactory.createERC20(bytecode, salt);
             const createERC20 = await ercFactory.createERC20(bytecode, salt, initializer);
             const tx = await createERC20.wait();
             const data = tx.logs[0].data;
             const contractAddress = "0x" + data.slice(26, data.length);
+            // console.log("     createERC20 contract address: ", contractAddress);
             const deployedERC20Factory = await ethers.getContractAt("ERC20FactoryV0", contractAddress);
             await deployedERC20Factory.initialize()
             const isInitialized = await deployedERC20Factory.isInitialized();
