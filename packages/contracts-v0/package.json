@@ -4,9 +4,7 @@
     "scripts": {
         "help": "npx hardhat help",
         "test": "yarn test:ercFactory:v0",
-        "test:lock":"npx hardhat test test/Lock.test.ts",
-        "test:factory":"npx hardhat test test/ContractFactory.test.ts",
-        "test:factory2":"npx hardhat test test/ContractFactory.test2.ts",
+        "test:lock": "npx hardhat test test/Lock.test.ts",
         "test:ercFactory:v0": "npx hardhat test test/ERCFactoryV0.test.ts",
         "test:all": "npx hardhat test",
         "test:gas": "REPORT_GAS=true npx hardhat test",
@@ -18,6 +16,8 @@
         "deploy": "yarn scripts:deploy",
         "scripts:deploy": "yarn scripts:deploy:lock:goerli",
         "scripts:deploy:lock:goerli": "npx hardhat run scripts/deploy.ts --network goerli",
+        "scripts:deploy:factory:goerli": "npx hardhat run scripts/deploy-factory.ts --network goerli",
+        "scripts:createERC20:factory:goerli": "npx hardhat run scripts/createERC20.ts --network goerli",
         "prettier:write": "prettier --write .",
         "prettier:check": "prettier --check .",
         "lint": "yarn lint:sol",
@@ -47,6 +47,7 @@
         "@nomiclabs/hardhat-ethers": "^2.2.2",
         "@nomiclabs/hardhat-etherscan": "^3.1.5",
         "@openzeppelin/contracts": "^4.8.1",
+        "@openzeppelin/contracts-upgradeable": "^4.8.2",
         "ethers": "^5.7.2",
         "hardhat-gas-reporter": "^1.0.9",
         "solidity-coverage": "^0.8.2"
