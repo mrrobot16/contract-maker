@@ -45,12 +45,8 @@ describe('ERCFactoryV0 Contract', function () {
         );
         erc20Factory = await ethers.getContractFactory("ERC20FactoryV0")
         ercFactory = await contract.deploy();    
-        // await ercFactory.deployed();
-        // await ercFactory.initialize(ercStorageAddress);
         await ercFactory.initialize();
-        
         address = ercFactory.address
-
     });
 
     describe('Deployment ERCFactory', function () {     
@@ -79,13 +75,11 @@ describe('ERCFactoryV0 Contract', function () {
             const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
             const createERC20 = await ercFactory.createERC20(bytecode, salt, initializer);
             const tx = await createERC20.wait();
-            const data = tx.logs[0].data;
-            const contractAddress = "0x" + data.slice(26, data.length);
-            // console.log("     createERC20 contract address: ", contractAddress);
-            const deployedERC20Factory = await ethers.getContractAt("ERC20FactoryV0", contractAddress);
-            await deployedERC20Factory.initialize()
-            // console.log('    deployedERC20Factory: ', Object.keys(deployedERC20Factory));
-            const isInitialized = await deployedERC20Factory.isInitialized();
+            const logs = tx.logs;
+            const contractAddress = logs[0].address;
+            erc20Token = await ethers.getContractAt("ERC20FactoryV0", contractAddress);
+            const isInitialized = await erc20Token.isInitialized();
+            expect(erc20Token.address).to.equal(contractAddress);
             expect(isInitialized).to.equal(true);
         });
     });
