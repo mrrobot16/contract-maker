@@ -8,7 +8,7 @@ import erc20FactoryV0 from '../artifacts/contracts/factory/ERC20FactoryV0.sol/ER
 const MockERC20Token = {
     name: "TestFactoryTokenV0",
     symbol: "TFT",
-    totalSupply: 1000000000000000000000000,
+    totalSupply: BigNumber.from("1000000000000000000000000"),
 }
 
 describe('ERCFactoryV0 Contract', function () {
@@ -69,12 +69,12 @@ describe('ERCFactoryV0 Contract', function () {
             const paramsTypes = [
                 "string", 
                 "string", 
-                // "uint256"
+                "uint256"
             ];
             const paramsInitiliazer = [
                 name, 
                 symbol, 
-                // totalSupply
+                totalSupply
             ];
             const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
             const createERC20 = await ercFactory.createERC20(bytecode, salt, initializer);
@@ -84,6 +84,7 @@ describe('ERCFactoryV0 Contract', function () {
             // console.log("     createERC20 contract address: ", contractAddress);
             const deployedERC20Factory = await ethers.getContractAt("ERC20FactoryV0", contractAddress);
             await deployedERC20Factory.initialize()
+            // console.log('    deployedERC20Factory: ', Object.keys(deployedERC20Factory));
             const isInitialized = await deployedERC20Factory.isInitialized();
             expect(isInitialized).to.equal(true);
         });
