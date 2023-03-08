@@ -47,23 +47,6 @@ describe('ERCFactoryV0 Contract', function () {
 
     });
 
-    describe.skip('Deployment ERCFactoryStorage', function () {     
-        it("Should deploy storage contract correctly", async function () {
-            expect(typeof ercStorageAddress).to.equal("string");
-            expect(ercStorageAddress.slice(0, 2)).to.equal("0x");
-        }); 
-
-        it("Should have correct count of ERC20s in storage", async function () {
-            expect(await ercStorage.erc20sCount()).to.equal(0);
-        });
-        it("Should correct count of erc20 tokens upon storage deployment", async function () {
-            erc20Tokens = await ercStorage.getERC20s();
-            let erc20TokensCount = await ercStorage.erc20sCount();
-            expect(erc20Tokens.length).to.equal(0);
-            expect(erc20TokensCount).to.equal(0);
-        });
-    });
-
     describe('Deployment ERCFactory', function () {     
         it("Should set the right owner", async function () {
             expect(await ercFactory.owner()).to.equal((owner as SignerWithAddress).address);
@@ -84,19 +67,6 @@ describe('ERCFactoryV0 Contract', function () {
             await deployedERC20Factory.initialize()
             const isInitialized = await deployedERC20Factory.isInitialized();
             expect(isInitialized).to.equal(true);
-        });
-
-        it.skip("Should have correct count of erc20 tokens after ercFactory.createERC20()", async function () {
-            erc20Tokens = await ercStorage.getERC20s();
-            let erc20TokensCount = await ercStorage.erc20sCount();
-            expect(erc20Tokens.length).to.equal(1);
-            expect(erc20TokensCount).to.equal(1);
-        });
-
-        it.skip("Should return correct name of erc20 token after ercFactory.createERC20()", async function () {
-            erc20Token = await ercStorage.getERC20(0);    
-            const contract = await ethers.getContractAt(erc20FactoryV0.abi, erc20Token);
-            expect(await contract.name()).to.equal("TestFactoryTokenV0");          
         });
     });
 
