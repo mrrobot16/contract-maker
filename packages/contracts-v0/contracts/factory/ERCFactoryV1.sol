@@ -16,9 +16,13 @@ contract ERCFactoryV1 is ERCFactoryV0 {
     //   _owner = msg.sender;
     // }
 
-    function createERC20(string memory name, string memory symbol, uint256 totalSupply) public virtual override {
-      ERC20FactoryV0 _erc20 = new ERC20FactoryV0(name, symbol);
-      _erc20.mint(msg.sender, totalSupply);
+    function createERC20(string memory name, string memory symbol, uint256 totalSupply) public virtual {
+      // ERC20FactoryV0 _erc20 = new ERC20FactoryV0(name, symbol, totalSupply);
+      console.log("something new in createERC20 ERCFactoryV1");
+      console.log("name: s%", name);
+      console.log("symbol: s%", symbol);
+      console.log("totalSupply: s%", totalSupply);
+      // _erc20.mint(msg.sender, totalSupply);
       // ERCFactoryStorage(ercFactoryStorage).setERC20(address(_erc20));
     }
 

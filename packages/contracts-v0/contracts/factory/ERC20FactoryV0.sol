@@ -12,7 +12,7 @@ contract ERC20FactoryV0 {
     //   console.log("ERC20FactoryV0 constructor called");
     // }
     function initialize() public { // NOTE: this function can only be called once
-      console.log("ERC20FactoryV0 initialize called");
+      console.log("     ERC20FactoryV0 initialize called");
       initialized = true;
     }
 
