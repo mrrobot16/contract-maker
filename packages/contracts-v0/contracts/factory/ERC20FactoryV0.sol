@@ -1,18 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 import "hardhat/console.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20BurnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-// contract ERC20FactoryV0 is ERC20 {
-contract ERC20FactoryV0 {
-
+contract ERC20FactoryV0 is Initializable, OwnableUpgradeable, ERC20BurnableUpgradeable  {
      bool private initialized = false;
 
-    // constructor(string memory name, string memory symbol) ERC20(name, symbol) {
-    //   console.log("ERC20FactoryV0 constructor called");
-    // }
-    function initialize() public { // NOTE: this function can only be called once
-      console.log("     ERC20FactoryV0 initialize called");
+    function initialize(string memory _name, string memory _symbol) public initializer {
+    // function initialize(string memory _name, string memory _symbol, uint256 _totalSupply) public initializer {
+      OwnableUpgradeable.__Ownable_init();
+      ERC20BurnableUpgradeable.__ERC20Burnable_init();
+      ERC20Upgradeable.__ERC20_init(_name, _symbol);
       initialized = true;
     }
 
@@ -21,3 +22,5 @@ contract ERC20FactoryV0 {
     }
 
 }
+
+
