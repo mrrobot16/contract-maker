@@ -5,6 +5,12 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/src/signers";
 
 import erc20FactoryV0 from '../artifacts/contracts/factory/ERC20FactoryV0.sol/ERC20FactoryV0.json';
 
+const MockERC20Token = {
+    name: "TestFactoryTokenV0",
+    symbol: "TFT",
+    totalSupply: 1000000000000000000000000,
+}
+
 describe('ERCFactoryV0 Contract', function () {
     let signers: SignerWithAddress[] | Signer[];
     let owner: SignerWithAddress | Signer;
@@ -59,7 +65,20 @@ describe('ERCFactoryV0 Contract', function () {
         it("Should create ERC20 token", async function () {
             const bytecode = erc20Factory.bytecode;
             const salt = ethers.utils.randomBytes(32);
-            const createERC20 = await ercFactory.createERC20(bytecode, salt);
+            const { name, symbol, totalSupply } = MockERC20Token;
+            const paramsTypes = [
+                "string", 
+                "string", 
+                // "uint256"
+            ];
+            const paramsInitiliazer = [
+                name, 
+                symbol, 
+                // totalSupply
+            ];
+            const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
+            // const createERC20 = await ercFactory.createERC20(bytecode, salt);
+            const createERC20 = await ercFactory.createERC20(bytecode, salt, initializer);
             const tx = await createERC20.wait();
             const data = tx.logs[0].data;
             const contractAddress = "0x" + data.slice(26, data.length);
