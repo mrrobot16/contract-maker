@@ -12,7 +12,8 @@ contract ERCFactoryV0 {
       _owner = msg.sender;
     }
 
-    function createERC20(bytes memory erc20, bytes32 salt) public virtual {
+    // function createERC20(bytes memory erc20, bytes32 salt) public virtual {
+    function createERC20(bytes memory erc20, bytes32 salt, bytes memory initializer) public virtual {
         // NOTE: string name, string symbol & totalSupply will be passed in as bytes 
         // which will be decoded in the ERC20FactoryV0 contract
         address _erc20;
