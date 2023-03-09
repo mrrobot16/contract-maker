@@ -43,10 +43,10 @@ describe('ERCFactoryV0 Contract', function () {
         contract = await ethers.getContractFactory(
             "ERCFactoryV0"
         );
-        erc20Factory = await ethers.getContractFactory("ERC20FactoryV0")
+        erc20Factory = await ethers.getContractFactory("ERC20FactoryV0");
         ercFactory = await contract.deploy();    
         await ercFactory.initialize();
-        address = ercFactory.address
+        address = ercFactory.address;
     });
 
     describe('Deployment ERCFactory', function () {     
