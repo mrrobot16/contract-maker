@@ -7,7 +7,7 @@ import "./ERC20FactoryV0.sol";
 contract ERCFactoryV0 {
     address private _owner;
     bool private initialized = false;
-    event ERC20Created(address erc20Address);
+    event ERC20Created(address erc20Address, address owner);
 
     function initialize() public {
       _owner = msg.sender;
@@ -26,7 +26,7 @@ contract ERCFactoryV0 {
       }
       // ERC20FactoryV0(_erc20).initialize(_name, _symbol, _totalSupply);
       ERC20FactoryV0(_erc20).initialize(_name, _symbol);
-      emit ERC20Created(_erc20);
+      emit ERC20Created(_erc20, msg.sender);
     }
 
     function owner() public view returns (address) {
