@@ -34,7 +34,6 @@ async function main() {
     const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
     const createERC20 = await ERCFactoryV0.createERC20(bytecode, salt, initializer, { gasLimit: 1000000 });
     const tx = await createERC20.wait();
-    console.log('tx: ', tx);
     const logs = tx.logs;
     const data = logs[0].data;
     const contractAddress = "0x" + data.slice(26, data.length);
