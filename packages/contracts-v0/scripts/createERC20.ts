@@ -14,6 +14,9 @@ const MockERC20Token = {
     totalSupply: BigNumber.from("1000000000000000000000000"),
 }
 
+const createERC20Value = ethers.utils.parseEther("0.000001");
+const gasLimit = 1000000;
+
 async function main() {
     const ERCFactoryV0 = await ethers.getContractAt("ERCFactoryV0", ercFactoryV0.address);
     console.log("ERCFactoryV0 contract address: ", ercFactoryV0.address);
@@ -33,7 +36,12 @@ async function main() {
     ];
     const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
     const createERC20 = await ERCFactoryV0.createERC20(bytecode, salt, initializer, { gasLimit: 1000000 });
+    // NOTE goerli - test calling a non-assembly call function.
+    const createERC202 = await ERCFactoryV0.createERC202({ gasLimit, value: createERC20Value });
     const tx = await createERC20.wait();
+    const tx2 = await createERC202.wait();
+    // console.log('tx: ', Object.keys(tx));
+    // console.log('tx2: ', Object.keys(tx2));
     const logs = tx.logs;
     const data = logs[0].data;
     const contractAddress = "0x" + data.slice(26, data.length);
