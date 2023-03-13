@@ -8,7 +8,7 @@ import { writeJSONFile } from '../utils/files';
 
 async function main() {
     const ERCFactoryV0 = await ethers.getContractFactory("ERCFactoryV0");
-    const ercFactoryV0 = await ERCFactoryV0.deploy();
+    const ercFactoryV0 = await ERCFactoryV0.deploy({ gasLimit: 1000000});
     // console.log("ERCFactoryV0 deployed to:", ercFactoryV0);
     await ercFactoryV0.deployed();
     console.log(`ERCFactoryV0 deployed to ${ercFactoryV0.address}`);

@@ -36,17 +36,14 @@ async function main() {
     ];
     const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
     const createERC20 = await ERCFactoryV0.createERC20(bytecode, salt, initializer, { gasLimit: 1000000 });
-    // NOTE goerli - test calling a non-assembly call function.
-    const createERC202 = await ERCFactoryV0.createERC202({ gasLimit, value: createERC20Value });
     const tx = await createERC20.wait();
-    const tx2 = await createERC202.wait();
-    // console.log('tx: ', Object.keys(tx));
-    // console.log('tx2: ', Object.keys(tx2));
+    console.log('tx: ', Object.keys(tx));
     const logs = tx.logs;
     const data = logs[0].data;
     const contractAddress = "0x" + data.slice(26, data.length);
     const deployedERC20Factory = await ethers.getContractAt("ERC20FactoryV0", contractAddress);
     const isInitialized = await deployedERC20Factory.isInitialized();
+    console.log("isInitialized: ", isInitialized);
     const filePath = `scripts/deployments/${Network}/createERC20.json`;
     const fileData = {
         network: Network,
