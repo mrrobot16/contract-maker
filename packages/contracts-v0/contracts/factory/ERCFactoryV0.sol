@@ -14,8 +14,11 @@ contract ERCFactoryV0 {
       initialized = true;
     }
 
-    function createERC20(bytes memory bytecode, bytes32 salt, bytes memory initializer) public {
+function createERC20(address _singleton, bytes32 salt, bytes memory initializer) public {
+  
+    // function createERC20(bytes memory bytecode, bytes32 salt, bytes memory initializer) public {
       (string memory _name, string memory _symbol) = abi.decode(initializer, (string, string));
+      bytes memory bytecode = abi.encodePacked(type(ERC20FactoryV0).creationCode, uint256(uint160(_singleton)));
       // (string memory _name, string memory _symbol, uint256 _totalSupply) = abi.decode(initializer, (string, string, uint256));
       address _erc20;
       assembly {
@@ -24,27 +27,11 @@ contract ERCFactoryV0 {
           revert(0, 0)
         }
       }
+      // console.log("ERC20 address: ", _erc20);
       // ERC20FactoryV0(_erc20).initialize(_name, _symbol, _totalSupply);
       ERC20FactoryV0(_erc20).initialize(_name, _symbol);
       emit ERC20Created(_erc20, msg.sender);
     }
-
-    function createERC202() public payable {
-      // (string memory _name, string memory _symbol) = abi.decode(initializer, (string, string));
-      // (string memory _name, string memory _symbol, uint256 _totalSupply) = abi.decode(initializer, (string, string, uint256));
-      // address _erc20 = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
-      // uint value =  msg.value;
-      // assembly {
-      //   _erc20 := create2(value, add(bytecode, 0x20), mload(bytecode), salt)
-      //   if iszero(extcodesize(_erc20)) {
-      //     revert(0, 0)
-      //   }
-      // }
-      // ERC20FactoryV0(_erc20).initialize(_name, _symbol, _totalSupply);
-      // ERC20FactoryV0(_erc20).initialize(_name, _symbol);
-      // emit ERC20Created(_erc20, msg.sender);
-    }
-
 
     function owner() public view returns (address) {
       return _owner;
