@@ -14,12 +14,11 @@ contract ERCFactoryV0 {
       initialized = true;
     }
 
-function createERC20(address _singleton, bytes32 salt, bytes memory initializer) public {
-  
-    // function createERC20(bytes memory bytecode, bytes32 salt, bytes memory initializer) public {
+function createERC20(address _singleton, bytes32 salt, bytes memory initializer) public {  
+// function createERC20(bytes memory bytecode, bytes32 salt, bytes memory initializer) public {
       (string memory _name, string memory _symbol) = abi.decode(initializer, (string, string));
-      bytes memory bytecode = abi.encodePacked(type(ERC20FactoryV0).creationCode, uint256(uint160(_singleton)));
       // (string memory _name, string memory _symbol, uint256 _totalSupply) = abi.decode(initializer, (string, string, uint256));
+      bytes memory bytecode = abi.encodePacked(type(ERC20FactoryV0).creationCode, uint256(uint160(_singleton)));
       address _erc20;
       assembly {
         _erc20 := create2(0, add(bytecode, 0x20), mload(bytecode), salt)
@@ -28,8 +27,8 @@ function createERC20(address _singleton, bytes32 salt, bytes memory initializer)
         }
       }
       // console.log("ERC20 address: ", _erc20);
-      // ERC20FactoryV0(_erc20).initialize(_name, _symbol, _totalSupply);
       ERC20FactoryV0(_erc20).initialize(_name, _symbol);
+      // ERC20FactoryV0(_erc20).initialize(_name, _symbol, _totalSupply);
       emit ERC20Created(_erc20, msg.sender);
     }
 
