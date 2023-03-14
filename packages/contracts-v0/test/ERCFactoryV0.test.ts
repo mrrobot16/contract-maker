@@ -19,6 +19,7 @@ describe('ERCFactoryV0 Contract', function () {
     let ercFactory: Contract;
 
     let erc20Factory: ContractFactory;
+    let erc20: Contract;
     // let erc20Factory: Contract;
 
     let address: string;
@@ -44,6 +45,7 @@ describe('ERCFactoryV0 Contract', function () {
             "ERCFactoryV0"
         );
         erc20Factory = await ethers.getContractFactory("ERC20FactoryV0");
+        erc20 = await erc20Factory.deploy();
         ercFactory = await contract.deploy();    
         await ercFactory.initialize();
         address = ercFactory.address;
@@ -73,7 +75,7 @@ describe('ERCFactoryV0 Contract', function () {
                 totalSupply
             ];
             const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
-            const createERC20 = await ercFactory.createERC20(bytecode, salt, initializer);
+            const createERC20 = await ercFactory.createERC20(erc20.address, salt, initializer);
             const tx = await createERC20.wait();
             const logs = tx.logs;
             const contractAddress = logs[0].address;
