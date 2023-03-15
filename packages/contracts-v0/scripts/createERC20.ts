@@ -32,6 +32,7 @@ async function main() {
         // totalSupply
     ];
     const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
+    // NOTE: Need to check why gas is so high.
     const gasCost = await ERCFactoryV0.estimateGas.createERC20(erc20Factory.address, salt, initializer);
     const createERC20 = await ERCFactoryV0.createERC20(erc20Factory.address, salt, initializer, { gasLimit: gasCost.toNumber() });
     const tx = await createERC20.wait();
