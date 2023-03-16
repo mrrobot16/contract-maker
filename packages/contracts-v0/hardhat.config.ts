@@ -8,6 +8,7 @@ dotenv.config();
 const {
     INFURA_ID,
     GOERLI_PRIVATE_KEY,
+    MATIC_PRIVATE_KEY,
     GOERLI_PRIVATE_KEY2,
     GOERLI_INFURA_URL,
     MAINNET_PRIVATE_KEY,
@@ -27,17 +28,24 @@ const goerli = {
     accounts,
 };
 
+
+const polygon = {
+    polygon_mumbai: { 
+        url: "https://rpc-mumbai.maticvigil.com", 
+        accounts: [MATIC_PRIVATE_KEY as string]
+    }
+}
+
 const networks = {
     goerli,
+    ...polygon
 };
 
 const config: HardhatUserConfig = {
     solidity: {
         compilers: [{ version: '0.8.17', settings: {} }],
     },
-    networks: {
-        goerli,
-    },
+    networks,
     etherscan: {
         apiKey: ETHERSCAN_API_KEY,
     },
