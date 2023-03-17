@@ -5,6 +5,7 @@ import {
 } from '../utils/constants';
 
 import { writeJSONFile } from '../utils/files';
+// TODO: Find out why gas cost is very high, checkout Alchemy or Tendermint.
 
 async function main() {
     const ERCFactoryV0 = await ethers.getContractFactory("ERCFactoryV0");
