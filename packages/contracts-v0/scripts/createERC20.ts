@@ -37,11 +37,11 @@ async function main() {
     const createERC20 = await ERCFactoryV0.createERC20(erc20Factory.address, salt, initializer, { gasLimit: gasCost.toNumber() });
     const tx = await createERC20.wait();
     const logs = tx.logs;
-    const data = logs[logs.length -1].data;
-    // NOTE: Need to fix this slice so that the final out has the correct length of characters for the address
-    const contractAddress = "0x" + (data.slice(26, data.length)).slice(0,26);
+    // NOTE: In order to get the address of the deployed contract, we need to parse the logs.
+    // NOTE With current event emitters, we can only get the address of the erc20 contract by parsing the last log of the transaction.
+    const data = logs[logs.length - 1].data;
+    const contractAddress = "0x" + data.slice(26, 26+40);
     console.log("contractAddress: ", contractAddress);
-    // NOTE: Below line is not working because we are not passing correct address to getContractAt.
     const deployedERC20Factory = await ethers.getContractAt("ERC20FactoryV0", contractAddress);
     const isInitialized = await deployedERC20Factory.isInitialized();
     const filePath = `scripts/deployments/${Network}/createERC20.json`;
