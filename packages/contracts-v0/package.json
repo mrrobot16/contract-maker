@@ -15,6 +15,7 @@
         "hardhat:check": "npx hardhat check",
         "deploy": "yarn scripts:deploy",
         "deploy:createERC20": "yarn deploy && yarn scripts:createERC20",
+        "createERC20": "yarn scripts:createERC20",
         "scripts:deploy": "yarn scripts:deploy:factory:goerli",
         "scripts:deploy:lock:goerli": "npx hardhat run scripts/deploy.ts --network goerli",
         "scripts:deploy:factory:goerli": "npx hardhat run scripts/deploy-factory.ts --network goerli",
