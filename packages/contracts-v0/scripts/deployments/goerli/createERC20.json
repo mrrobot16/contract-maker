@@ -1,5 +1,6 @@
 {
+  "contract": "ERC20FactoryV0",
   "network": "goerli",
-  "address": "0x34D56e7906fa1a9d8113A57365598538c0E86a0A",
-  "etherscan_url": "https://goerli.etherscan.io/address/0x34D56e7906fa1a9d8113A57365598538c0E86a0A"
+  "address": "0x2ab4a241c452a348651c7afa56eb925d3fb3dd2d",
+  "etherscan_url": "https://goerli.etherscan.io/address/0x2ab4a241c452a348651c7afa56eb925d3fb3dd2d"
 }
