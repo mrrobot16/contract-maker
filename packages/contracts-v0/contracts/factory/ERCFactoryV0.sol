@@ -4,6 +4,8 @@ import "hardhat/console.sol";
 import "./ERC20FactoryV0.sol";
 // import "../storage/ERCFactoryStorage.sol";
 
+// TODO: Implement tenderly and compare gas costs with createERC20
+
 contract ERCFactoryV0 {
     address private _owner;
     bool private initialized = false;
