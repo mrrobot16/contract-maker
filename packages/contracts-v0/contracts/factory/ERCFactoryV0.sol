@@ -16,6 +16,8 @@ contract ERCFactoryV0 {
       initialized = true;
     }
 
+// NOTE: Try checking if by pass the bytecode as a parameter, 
+// it will decerease the gas cost of the createERC20 function.
 function createERC20(address _singleton, bytes32 salt, bytes memory initializer) public {  
 // function createERC20(bytes memory bytecode, bytes32 salt, bytes memory initializer) public {
       (string memory _name, string memory _symbol) = abi.decode(initializer, (string, string));
