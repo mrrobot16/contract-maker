@@ -75,7 +75,8 @@ describe('ERCFactoryV0 Contract', function () {
                 totalSupply
             ];
             const initializer = ethers.utils.defaultAbiCoder.encode(paramsTypes, paramsInitiliazer);
-            const createERC20 = await ercFactory.createERC20(erc20.address, salt, initializer);
+            // const createERC20 = await ercFactory.createERC20(erc20.address, salt, initializer);
+            const createERC20 = await ercFactory.createERC20(bytecode, salt, initializer);            
             const tx = await createERC20.wait();
             const logs = tx.logs;
             const contractAddress = logs[0].address;
