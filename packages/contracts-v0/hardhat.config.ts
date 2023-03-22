@@ -14,6 +14,7 @@ const {
     MAINNET_PRIVATE_KEY,
     MAINNET_INFURA_URL,
     ETHERSCAN_API_KEY,
+    MATIC_MUMBAI_PRIVATE_KEY,
 } = process.env;
 
 const url = `${GOERLI_INFURA_URL}${INFURA_ID}`;
@@ -32,7 +33,7 @@ const goerli = {
 const polygon = {
     polygon_mumbai: { 
         url: "https://rpc-mumbai.maticvigil.com", 
-        accounts: [MATIC_PRIVATE_KEY as string]
+        accounts: [MATIC_MUMBAI_PRIVATE_KEY as string]
     }
 }
 
