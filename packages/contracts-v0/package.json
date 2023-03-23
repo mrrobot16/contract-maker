@@ -23,6 +23,7 @@
         "scripts:deploy:factory:goerli": "npx hardhat run scripts/deploy-factory.ts --network goerli",
         "scripts:createERC20": "yarn scripts:createERC20:factory:goerli",
         "scripts:createERC20:factory:goerli": "npx hardhat run scripts/createERC20.ts --network goerli",
+        "scripts:createERC20:factory:mumbai": "npx hardhat run scripts/createERC20.ts --network polygon_mumbai",
         "scripts:setInitialize:factory:goerli": "npx hardhat run scripts/initializeFactory.ts --network goerli",
         "scripts:gasTester": "npx hardhat run scripts/deploy-factoryGasTester.ts --network polygon_mumbai",
         "prettier:write": "prettier --write .",
