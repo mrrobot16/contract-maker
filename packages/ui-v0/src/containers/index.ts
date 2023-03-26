@@ -1,4 +1,4 @@
-import Organization from "containers/Contract";
-import CreateOrganization from "containers/CreateContract";
+import Contract from "containers/Contract";
+import CreateContract from "containers/CreateContract";
 
-export { Organization, CreateOrganization };
+export { Contract, CreateContract };

@@ -1,4 +1,4 @@
-import CreateOrganizationForm from "components/CreateOrganizationForm";
+import CreateContractForm from "components/CreateContractForm";
 import { MemberList } from "components/members/MembersList";
 import { DashboardMemberList } from "components/members/DashboardMembersList";
-export { CreateOrganizationForm, MemberList, DashboardMemberList };
+export { CreateContractForm, MemberList, DashboardMemberList };

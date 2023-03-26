@@ -13,7 +13,7 @@ const buttonStyle = {
   margin: "10px",
 };
 
-function Organization() {
+function Contract() {
   const params = useParams();
   const organization = params.address as `0x${string}`;
   const [orgMembers, setMembers] = useState<Member[]>([]);
@@ -161,4 +161,4 @@ function Organization() {
   );
 }
 
-export default Organization;
+export default Contract;

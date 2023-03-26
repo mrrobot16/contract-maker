@@ -1,19 +1,19 @@
 import React from "react";
 import { Container, Box, Typography } from "@mui/material";
 
-import { CreateOrganizationForm } from "components";
+import { CreateContractForm } from "components";
 
-function CreateOrganization() {
+function CreateContract() {
   return (
     <Container maxWidth="md">
       <Box>
         <Typography variant="h1" component="h1" align="center">
-          Create an Organization
+          Create a Contract
         </Typography>
       </Box>
-      <CreateOrganizationForm />
+      <CreateContractForm />
     </Container>
   );
 }
 
-export default CreateOrganization;
+export default CreateContract;

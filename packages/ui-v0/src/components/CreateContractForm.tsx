@@ -19,7 +19,7 @@ const mockMembers: Member[] = [
 
 const { REACT_APP_ENVIRONMENT: APP_ENV } = process.env;
 
-function CreateOrganizationForm() {
+function CreateContractForm() {
   const [name, setName] = React.useState<string>("");
   const [member, setMember] = React.useState<Member>({
     address: "",
@@ -176,4 +176,4 @@ function CreateOrganizationForm() {
   );
 }
 
-export default CreateOrganizationForm;
+export default CreateContractForm;
