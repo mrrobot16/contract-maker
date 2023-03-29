@@ -87,7 +87,7 @@ describe('ERCFactoryV0 Contract', function () {
         });
     });
 
-    describe.skip('Deployment ERCFactoryProxyAdmin', function () {
+    describe('Deployment ERCFactoryProxyAdmin', function () {
         
         it("Should deploy ERCFactoryProxyAdmin correctly", async function () {
             ercFactoryProxyAdmin = await ethers.getContractFactory(
@@ -101,7 +101,7 @@ describe('ERCFactoryV0 Contract', function () {
         }); 
     });
 
-    describe.skip('Deployment ERCFactoryProxy', function () {
+    describe('Deployment ERCFactoryProxy', function () {
         
         it("Should deploy ERCFactoryProxy correctly", async function () {
             ercFactoryProxy = await ethers.getContractFactory(
