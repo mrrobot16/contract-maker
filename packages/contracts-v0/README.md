@@ -17,3 +17,5 @@ INFURA_ID=7adsh12783haiusd912
 GOERLI_PRIVATE_KEY=jklhasdh8123n12jk3asd89e12
 GOERLI_INFURA_URL=https://goerli.infura.io/v3/```
 ````
+TODO: 
+- [ ] Figure out why deployments of contracts using create2 opcode function are expensive.
