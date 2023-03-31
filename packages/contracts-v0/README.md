@@ -19,3 +19,4 @@ GOERLI_INFURA_URL=https://goerli.infura.io/v3/```
 ````
 TODO: 
 - [ ] Figure out why deployments of contracts using create2 opcode function are expensive.
+- [ ] Deploy proxy admin contract for ERCFactory
