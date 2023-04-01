@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "App";
-import { Organization } from "containers";
+import { Contract } from "containers";
 
 test("renders learn react link", () => {
   render(<App />);
@@ -10,7 +10,7 @@ test("renders learn react link", () => {
 });
 
 test("renders learn react link", () => {
-  render(<Organization />);
+  render(<Contract />);
   // const organizationName = screen.getByText(/Organization name/i);
   // expect(organizationName).toBeInTheDocument();
   // const organizationAddress = screen.getByText(/Organization Address/i);

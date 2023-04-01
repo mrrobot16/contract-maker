@@ -42,3 +42,15 @@ export const CHAIN_INFO: ChainInfo = {
   [ChainId.MUMBAI]: mumbai,
   [ChainId.MATIC]: matic,
 };
+
+
+export const SUPPORTED_CONTRACTS = [
+  {
+    name: "ERC20",
+    type: "ERC20",
+  },
+  {
+    name: "ERC721",
+    type: "ERC721",
+  },
+]

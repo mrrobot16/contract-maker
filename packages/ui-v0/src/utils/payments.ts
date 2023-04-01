@@ -5,7 +5,7 @@ export const sanitizePayments = (
   to: Member["address"],
   amount: number
 ) => {
-  if (amount == 0) {
+  if (amount === 0) {
     const filteredPayments = payments.filter((payment) => payment.to !== to);
     return [...filteredPayments];
   }
