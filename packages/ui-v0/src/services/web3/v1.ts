@@ -8,7 +8,7 @@ import {
 } from "ethers";
 
 import OrganizationABI from "services/web3/abis/OrganizationV1.json";
-import { Member, EthereumWindowProvider, Payment } from "types";
+import { EthereumWindowProvider, Payment } from "types";
 import { convertMembersArrayToArrayOfObject, encodePayments } from "utils";
 
 const { REACT_APP_NETWORK: NETWORK } = process.env;
@@ -53,13 +53,13 @@ export class Web3 {
         );
       }
     } catch (error) {
-      throw "Web3.initialize() error: " + error;
+      throw Error("Web3.initialize() error: " + error);
     }
   }
 
-  public async deployOrgContractV1(
+  public async deployContractV1(
     name: string,
-    members: string[] | Member[],
+    symbol: string,
     depositAmount = 0.0001888
   ) {
     console.log(
@@ -73,10 +73,10 @@ export class Web3 {
     const txConfig = {
       value: ethers.utils.parseEther(depositAmount.toString()),
     };
-    let deployedOrgContract;
+    let deployedContract;
     if (ethereum?.selectedAddress != null) {
       try {
-        deployedOrgContract = await contract.deploy(name, members, txConfig);
+        deployedContract = await contract.deploy(name, symbol, txConfig);
       } catch (error: unknown) {
         throw new Error(
           "Possible RPC Error: Metamask Tx Signature: User denied transaction signature"
@@ -84,20 +84,20 @@ export class Web3 {
       }
     } else {
       await ethereum?.enable();
-      deployedOrgContract = await contract.deploy(name, members, txConfig);
+      deployedContract = await contract.deploy(name, symbol, txConfig);
     }
 
-    const deployed = await deployedOrgContract?.deployed();
+    const deployed = await deployedContract?.deployed();
     console.log(
       "Contract deployed successfully at address : ",
       deployed?.address
     );
-    const receipt = await deployedOrgContract?.deployTransaction.wait();
+    const receipt = await deployedContract?.deployTransaction.wait();
     console.log("Contract mined successfully at block: ", receipt?.blockNumber);
-    const deployedOrgContractAddress = deployed?.address;
-    const contractExplorerUrl = `https://${NETWORK}.etherscan.io/address/${deployedOrgContract?.address}`;
+    const deployedContractAddress = deployed?.address;
+    const contractExplorerUrl = `https://${NETWORK}.etherscan.io/address/${deployedContract?.address}`;
     const result = {
-      address: deployedOrgContractAddress,
+      address: deployedContractAddress,
       url: contractExplorerUrl,
       deployed,
       receipt,
