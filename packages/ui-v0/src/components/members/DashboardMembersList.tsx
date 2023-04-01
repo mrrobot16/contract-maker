@@ -37,6 +37,7 @@ export const DashboardMemberList = ({
         List of Members
       </Typography>
       {members.map((member, index) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const [amount, setAmount] = React.useState(0);
 
         const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +52,7 @@ export const DashboardMemberList = ({
         };
 
         const onClickPayMember = () => {
-          if (amount == 0) return;
+          if (amount === 0) return;
           onPayMember(member.address, amount);
         };
 
