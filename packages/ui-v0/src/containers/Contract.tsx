@@ -37,21 +37,22 @@ function Contract() {
     // For now quick fix is to check if balance
     // has already been set to avoid calling fetchOrgbalance Twice
     // This only happens if fetchOrgBalance is called last inside setOrgInfo.
-    if (orgBalance == undefined) await fetchOrgBalance();
+    if (orgBalance === undefined) await fetchOrgBalance();
   };
 
   const fetchOrgMembers = async () => {
     const web3 = await Web3.getInstance(organization);
     const getOrgMembers = await web3?.getOrgMembersV1();
-    if (getOrgMembers != undefined) setMembers(getOrgMembers);
+    if (getOrgMembers !== undefined) setMembers(getOrgMembers);
   };
 
   const fetchOrgBalance = async () => {
     const web3 = await Web3.getInstance(organization);
     const getOrgBalance = await web3?.getOrgBalanceV1();
-    if (getOrgBalance != undefined) setOrgBalance(getOrgBalance);
+    if (getOrgBalance !== undefined) setOrgBalance(getOrgBalance);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(componentDidMount, []);
 
   const removeMember = async (member: Member) => {
@@ -110,7 +111,7 @@ function Contract() {
 
         <DashboardMemberList
           members={
-            typeof orgMembers != undefined ? orgMembers : ([] as Member[])
+            typeof orgMembers !== "undefined" ? orgMembers : ([] as Member[])
           }
           onRemoveMember={removeMember}
           onPayMember={payMember}
