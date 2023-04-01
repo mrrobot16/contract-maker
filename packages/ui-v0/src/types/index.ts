@@ -18,3 +18,8 @@ export declare interface EthereumWindowProvider {
   request(request: { method: string; params?: Array<any> }): Promise<any>;
   chainId: string;
 }
+
+export interface ERCStandardContract {
+  name?: string
+  symbol?: string
+}
