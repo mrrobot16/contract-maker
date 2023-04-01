@@ -1,36 +1,29 @@
 import React, { useEffect } from "react";
-import { Box, Button, TextField, FormControl, FormLabel } from "@mui/material";
+import { Box, Button, TextField, FormControl, FormLabel, Typography } from "@mui/material";
 
 import { Web3 } from "services/web3/v1";
-import { Member } from "types";
-import { MemberList } from "components";
-import { convertToArrayOfAddresses } from "utils";
-import { APP_URL } from "utils/constants";
+import { ERCStandardContract } from "types";
+
+import { APP_URL, SUPPORTED_CONTRACTS } from "utils/constants";
 
 const formStyle = {
   display: "flex",
   flexDirection: "column",
 };
 
-const mockMembers: Member[] = [
-  { address: "0x5Db06acd673531218B10430bA6dE9b69913Ad545", amount: 0.00018 },
-  { address: "0x11bb17983E193A3cB0691505232331634B8FCa01", amount: 0.00018 },
-];
 
 const { REACT_APP_ENVIRONMENT: APP_ENV } = process.env;
 
 function CreateContractForm() {
+  const [contractType, setContractType] = React.useState<string>("");
   const [name, setName] = React.useState<string>("");
-  const [member, setMember] = React.useState<Member>({
-    address: "",
-    amount: 0,
-  });
-  const [members, setMembers] = React.useState<Member[]>([]);
+  const [symbol, setSymbol] = React.useState<string>("");
+  const [selectedContract, setSelectedContract] = React.useState<ERCStandardContract>({});
 
   const onChangeText = (textField: string, input: string) => {
     switch (textField) {
-      case "address":
-        setMember({ address: input, amount: "" });
+      case "symbol":
+        setSymbol(input);
         break;
       case "name":
         setName(input);
@@ -51,26 +44,17 @@ function CreateContractForm() {
   //   }
   // }
 
-  const addMember = () => {
-    if (!members.includes(member)) {
-      setMembers([...members, member]);
-    }
-  };
 
-  const removeMember = (index: number) => {
-    const newMembers = members.filter((item, i) => i !== index);
-    setMembers(newMembers);
-  };
+  const deployERCStandardContract = async () => {
 
-  const deployOrgContract = async () => {
     try {
       const web3 = await Web3.getInstance();
-      const contract = await web3.deployOrgContractV1(
+      const contract = await web3.deployContractV1(
         name,
-        convertToArrayOfAddresses(members),
+        symbol,
         0.00018
       );
-      if (APP_ENV == "development") {
+      if (APP_ENV === "development") {
         window.open(contract.url, "_blank");
       }
       callbackAfterDeployOrgContract(contract.address);
@@ -89,24 +73,57 @@ function CreateContractForm() {
   };
 
   const onSubmit = async () => {
-    deployOrgContract();
+    deployERCStandardContract();
   };
 
   const componentDidMount = () => {
     if (APP_ENV === "development") {
-      setName("TestUiOrg");
-      setMember({
-        address: "0x3D694A1C605e014b195FaA913e090e4BB9544FE3",
-        amount: 0.00018,
-      });
-      setMembers(mockMembers);
+      // setName("TestUiOrg");
+      // setMember({
+      //   address: "0x3D694A1C605e014b195FaA913e090e4BB9544FE3",
+      //   amount: 0.00018,
+      // });
+      // setMembers(mockMembers);
     }
   };
 
   useEffect(componentDidMount, []);
 
+  const SelectContractButtons = () => {
+    return(
+     <Box sx={formStyle}>
+      {
+        SUPPORTED_CONTRACTS.map((contract, index) => {
+          return (
+            <>
+              <Button
+                key={index}
+                variant="contained"
+                color="primary"
+                sx={{ width: 350 }}
+                onClick={()=>{
+                  setContractType(contract.type)
+                  setSelectedContract(contract)
+                }}
+              >
+                {contract.name}
+              </Button>
+              <br/>
+            </>
+          )
+        })
+      }
+     </Box> 
+    )
+  } 
+
   return (
     <Box sx={formStyle}>
+      <Box>
+        <Typography variant="h4" component="h4" align="center">
+          Select a Contract
+        </Typography>
+      </Box>
       {/* Form */}
       <Box
         component="form"
@@ -115,12 +132,23 @@ function CreateContractForm() {
           onSubmit();
         }}
       >
+
+        <SelectContractButtons />
+        { 
+        selectedContract.name ? (
+        <Box>
+          <Typography variant="h6" component="h4">
+            Selected Contract {selectedContract.name}
+          </Typography>
+        </Box>
+        ) : "" 
+        }
         <Box sx={formStyle}>
           <FormControl>
-            <FormLabel>Organization Name</FormLabel>
+            <FormLabel>Contract Name</FormLabel>
             <br />
             <TextField
-              label="Organization Name"
+              label="Contract Name"
               variant="outlined"
               onChange={(event) => onChangeText("name", event.target.value)}
               required={true}
@@ -128,32 +156,18 @@ function CreateContractForm() {
               sx={{ width: 350 }}
             />
           </FormControl>
-
           <FormControl>
-            <FormLabel>Add Member</FormLabel>
+            <FormLabel>Contract Symbol</FormLabel>
             <br />
-            <div style={{ display: "flex" }}>
-              <TextField
-                label="Member Address"
-                variant="outlined"
-                onChange={(event) =>
-                  onChangeText("address", event.target.value)
-                }
-                required={true}
-                value={member.address}
-                sx={{ width: 350 }}
-              />
-            </div>
+            <TextField
+              label="Contract Symbol"
+              variant="outlined"
+              onChange={(event) => onChangeText("symbol", event.target.value)}
+              required={true}
+              value={symbol}
+              sx={{ width: 350 }}
+            />
           </FormControl>
-          <br />
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ width: 350 }}
-            onClick={addMember}
-          >
-            Add Member
-          </Button>
           <br />
           {/* Submit */}
           <FormControl>
@@ -163,15 +177,11 @@ function CreateContractForm() {
               type="submit"
               sx={{ width: 350 }}
             >
-              Create Organization
+              Deploy { contractType} Contract 
             </Button>
           </FormControl>
         </Box>
       </Box>
-      {/* List */}
-      {members.length > 0 ? (
-        <MemberList members={members} onRemoveMember={removeMember} />
-      ) : null}
     </Box>
   );
 }
