@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Box, Button, TextField, FormControl, FormLabel, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  FormControl,
+  FormLabel,
+  Typography,
+} from "@mui/material";
 
 import { Web3 } from "services/web3/v1";
 import { ERCStandardContract } from "types";
@@ -11,14 +18,14 @@ const formStyle = {
   flexDirection: "column",
 };
 
-
 const { REACT_APP_ENVIRONMENT: APP_ENV } = process.env;
 
 function CreateContractForm() {
   const [contractType, setContractType] = React.useState<string>("");
   const [name, setName] = React.useState<string>("");
   const [symbol, setSymbol] = React.useState<string>("");
-  const [selectedContract, setSelectedContract] = React.useState<ERCStandardContract>({});
+  const [selectedContract, setSelectedContract] =
+    React.useState<ERCStandardContract>({});
 
   const onChangeText = (textField: string, input: string) => {
     switch (textField) {
@@ -44,16 +51,10 @@ function CreateContractForm() {
   //   }
   // }
 
-
   const deployERCStandardContract = async () => {
-
     try {
       const web3 = await Web3.getInstance();
-      const contract = await web3.deployContractV1(
-        name,
-        symbol,
-        0.00018
-      );
+      const contract = await web3.deployContractV1(name, symbol, 0.00018);
       if (APP_ENV === "development") {
         window.open(contract.url, "_blank");
       }
@@ -90,10 +91,9 @@ function CreateContractForm() {
   useEffect(componentDidMount, []);
 
   const SelectContractButtons = () => {
-    return(
-     <Box sx={formStyle}>
-      {
-        SUPPORTED_CONTRACTS.map((contract, index) => {
+    return (
+      <Box sx={formStyle}>
+        {SUPPORTED_CONTRACTS.map((contract, index) => {
           return (
             <>
               <Button
@@ -101,21 +101,20 @@ function CreateContractForm() {
                 variant="contained"
                 color="primary"
                 sx={{ width: 350 }}
-                onClick={()=>{
-                  setContractType(contract.type)
-                  setSelectedContract(contract)
+                onClick={() => {
+                  setContractType(contract.type);
+                  setSelectedContract(contract);
                 }}
               >
                 {contract.name}
               </Button>
-              <br/>
+              <br />
             </>
-          )
-        })
-      }
-     </Box> 
-    )
-  } 
+          );
+        })}
+      </Box>
+    );
+  };
 
   return (
     <Box sx={formStyle}>
@@ -132,17 +131,16 @@ function CreateContractForm() {
           onSubmit();
         }}
       >
-
         <SelectContractButtons />
-        { 
-        selectedContract.name ? (
-        <Box>
-          <Typography variant="h6" component="h4">
-            Selected Contract {selectedContract.name}
-          </Typography>
-        </Box>
-        ) : "" 
-        }
+        {selectedContract.name ? (
+          <Box>
+            <Typography variant="h6" component="h4">
+              Selected Contract {selectedContract.name}
+            </Typography>
+          </Box>
+        ) : (
+          ""
+        )}
         <Box sx={formStyle}>
           <FormControl>
             <FormLabel>Contract Name</FormLabel>
@@ -177,7 +175,7 @@ function CreateContractForm() {
               type="submit"
               sx={{ width: 350 }}
             >
-              Deploy { contractType} Contract 
+              Deploy {contractType} Contract
             </Button>
           </FormControl>
         </Box>

@@ -43,7 +43,6 @@ export const CHAIN_INFO: ChainInfo = {
   [ChainId.MATIC]: matic,
 };
 
-
 export const SUPPORTED_CONTRACTS = [
   {
     name: "ERC20",
@@ -53,4 +52,4 @@ export const SUPPORTED_CONTRACTS = [
     name: "ERC721",
     type: "ERC721",
   },
-]
+];

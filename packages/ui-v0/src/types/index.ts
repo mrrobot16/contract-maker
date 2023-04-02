@@ -20,6 +20,6 @@ export declare interface EthereumWindowProvider {
 }
 
 export interface ERCStandardContract {
-  name?: string
-  symbol?: string
+  name?: string;
+  symbol?: string;
 }
